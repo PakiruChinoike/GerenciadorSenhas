@@ -50,14 +50,18 @@ public class UILogin extends JFrame{
         btnLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 Usuario u = usuarioDAO.buscar(txtEmail.getText());
+                    if(u==null) {
+                        JOptionPane.showMessageDialog(contentPane, "Erro", "Erro ao autenticar usuário!", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        boolean b = realizarLogin(u, new String(txtSenha.getPassword()));
 
-                boolean b = realizarLogin(u, new String(txtSenha.getPassword()));
-                if (b){
-                    JOptionPane.showMessageDialog(contentPane,"Sucesso Hash: " + u.getSenha(),"Sucesso ao autenticar usuário!",JOptionPane.INFORMATION_MESSAGE);
-					dispose();
-                } else {
-                    JOptionPane.showMessageDialog(contentPane,"Erro","Erro ao autenticar usuário!",JOptionPane.ERROR_MESSAGE);
-                }
+                        if (b){
+                            JOptionPane.showMessageDialog(contentPane,"Sucesso! Hash: " + u.getSenha() + " Nome: " + u.getNome(),
+                            "Sucesso ao autenticar usuário!",JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(contentPane,"Erro","Erro ao autenticar usuário!",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
             }
         });
         btnLogin.setBounds(160, 200, 100, 30);

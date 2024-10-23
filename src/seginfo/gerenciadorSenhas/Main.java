@@ -40,6 +40,9 @@ public class Main {
 	}
 
 	private static void cadastrarUsuario(Scanner teclado) {
+		System.out.print("Digite o nome a ser cadastrado: ");
+		String nome = teclado.nextLine();
+
 		System.out.print("Digite o email a ser cadastrado: ");
 		String email = teclado.nextLine();
 
@@ -47,7 +50,7 @@ public class Main {
 		String senha = teclado.nextLine();
 		String hash = GerenciadorSenhas.codificar(senha);
 
-		Usuario u = new Usuario(0, email, hash);
+		Usuario u = new Usuario(0, nome, email, hash);
 		dao.salvar(u);
 
 		System.out.println("Email do usuário: " + email);

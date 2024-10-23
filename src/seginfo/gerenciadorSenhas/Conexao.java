@@ -18,7 +18,7 @@ public class Conexao {
         this.ip = "localhost";
         this.porta = "3306";
         this.login = "root";
-        this.senha = "Arthur2806";
+        this.senha = "root";
         this.nomeBd = "gerenciadorsenhas";
     }
 

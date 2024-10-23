@@ -40,10 +40,9 @@ public class UIPrincipal extends JFrame{
         btnLogin = new JButton("Login");
         btnLogin.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-        UILogin uiLog = new UILogin();
-        uiLog.setVisible(true);
-        dispose();
-        }
+                UILogin uiLog = new UILogin();
+                uiLog.setVisible(true);
+            }
         });
 
         btnLogin.setBounds(190, 225, 100, 30);

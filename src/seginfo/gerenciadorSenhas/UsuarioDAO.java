@@ -16,10 +16,11 @@ public class UsuarioDAO {
         try {
             this.conexao.abrirConexao();
 
-            String sql = "INSERT INTO usuario(email, senha) VALUES(?, ?)";
+            String sql = "INSERT INTO Usuario(nome, email, senha) VALUES(?,?, ?)";
             PreparedStatement statement = this.conexao.getConexao().prepareStatement(sql);
-            statement.setString(1, usuario.getEmail());
-            statement.setString(2, usuario.getSenha());
+            statement.setString(1, usuario.getNome());
+            statement.setString(2, usuario.getEmail());
+            statement.setString(3, usuario.getSenha());
             statement.executeUpdate();
 
             return usuario;
@@ -36,13 +37,14 @@ public class UsuarioDAO {
         try {
             this.conexao.abrirConexao();
 
-            String sql = "SELECT * FROM usuario WHERE email=?";
+            String sql = "SELECT * FROM Usuario WHERE email=?";
             PreparedStatement statement = this.conexao.getConexao().prepareStatement(sql);
             statement.setString(1, email);
             
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 Usuario usuario = new Usuario(rs.getLong("id"), 
+                    rs.getString("nome"),
                     rs.getString("email"), 
                     rs.getString("senha"));
 

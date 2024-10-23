@@ -13,6 +13,7 @@ public class UICadastro extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
+    private JTextField txtNome;
     private JTextField txtEmail;
 	private JPasswordField txtSenha;
 	private JButton btnCadastrar;
@@ -29,6 +30,14 @@ public class UICadastro extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
+        JLabel lblNewJLabel = new JLabel("Nome");
+        lblNewJLabel.setBounds(110, 20, 100, 30);
+        contentPane.add(lblNewJLabel);
+
+        txtNome = new JTextField();
+        txtNome.setBounds(100, 20, 90, 30);
+        contentPane.add(txtNome);
 
 		JLabel lblNewLabel1 = new JLabel("Email");
 		lblNewLabel1.setBounds(110, 60, 100, 30);
@@ -49,7 +58,7 @@ public class UICadastro extends JFrame {
         btnCadastrar = new JButton("Cadastrar");
         btnCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                Usuario usuario = realizarCadastro(txtEmail.getText(), new String(txtSenha.getPassword()));
+                Usuario usuario = realizarCadastro(txtNome.getText(), txtEmail.getText(), new String(txtSenha.getPassword()));
                 if (usuario!=null){
                     JOptionPane.showMessageDialog(contentPane,"Sucesso","Sucesso ao cadastrar usuário!",JOptionPane.INFORMATION_MESSAGE);
 					dispose();
@@ -63,10 +72,10 @@ public class UICadastro extends JFrame {
     }
 
 
-    private Usuario realizarCadastro(String email, String senha){
+    private Usuario realizarCadastro(String nome, String email, String senha){
         String hash = GerenciadorSenhas.codificar(senha);
 
-        Usuario usuario = new Usuario(0, email, hash);
+        Usuario usuario = new Usuario(0, nome, email, hash);
         return usuarioDAO.salvar(usuario);
     }
 
