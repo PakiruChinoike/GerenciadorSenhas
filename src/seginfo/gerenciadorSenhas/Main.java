@@ -2,12 +2,17 @@ package seginfo.gerenciadorSenhas;
 
 import java.util.Scanner;
 
+import gui.UIPrincipal;
+
 public class Main {
 
 	private static UsuarioDAO dao;
 
 	public static void main(String[] args) {
 		
+		UIPrincipal ui = new UIPrincipal();
+		ui.setVisible(true);
+
 		dao = new UsuarioDAO();
 		Scanner teclado = new Scanner(System.in);
 		

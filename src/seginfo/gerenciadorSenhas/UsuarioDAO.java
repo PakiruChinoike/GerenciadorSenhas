@@ -12,7 +12,7 @@ public class UsuarioDAO {
         this.conexao = new Conexao();
     }
 
-    public void salvar(Usuario usuario) {
+    public Usuario salvar(Usuario usuario) {
         try {
             this.conexao.abrirConexao();
 
@@ -22,8 +22,11 @@ public class UsuarioDAO {
             statement.setString(2, usuario.getSenha());
             statement.executeUpdate();
 
+            return usuario;
+
         } catch(SQLException e) {
             e.printStackTrace();
+            return null;
         } finally {
             this.conexao.fecharConexao();
         }
@@ -54,5 +57,4 @@ public class UsuarioDAO {
             this.conexao.fecharConexao();
         }
     }
-
 }
